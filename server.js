@@ -35,7 +35,18 @@ app.use("/api/auth", require("./routes/auth.route"));
 // ui
 
 // app.use("/", require("./routes/ui.route"));
-
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "API server is running!",
+    availableRoutes: [
+      "/api/quizzes",
+      "/api/questions",
+      "/api/users",
+      "/api/auth",
+    ],
+  });
+});
 // Xử lý lỗi 404
 app.use((req, res, next) => {
   next(httpError(404));
