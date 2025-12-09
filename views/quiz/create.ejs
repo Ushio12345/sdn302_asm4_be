@@ -1,0 +1,21 @@
+<h2>Create Quiz</h2>
+
+<% if(error) { %>
+<div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<form action="/quizzes/create" method="POST">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" name="title" id="title" class="form-control" required />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      name="description"
+      id="description"
+      class="form-control"
+    ></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Create Quiz</button>
+</form>

@@ -1,0 +1,44 @@
+<h2>Add Question to Quiz: <%= quiz.title %></h2>
+
+<% if(error) { %>
+<div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<form action="/quizzes/<%= quiz._id %>/question" method="POST">
+  <div class="mb-3">
+    <label for="text" class="form-label">Question Text</label>
+    <input type="text" id="text" name="text" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label for="options" class="form-label">Options (comma separated)</label>
+    <input
+      type="text"
+      id="options"
+      name="options"
+      class="form-control"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="correctAnswerIndex" class="form-label"
+      >Correct Answer Index</label
+    >
+    <input
+      type="number"
+      id="correctAnswerIndex"
+      name="correctAnswerIndex"
+      class="form-control"
+      min="0"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="keywords" class="form-label">Keywords (comma separated)</label>
+    <input type="text" id="keywords" name="keywords" class="form-control" />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Add Question</button>
+</form>

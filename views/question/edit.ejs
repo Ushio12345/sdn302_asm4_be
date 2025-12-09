@@ -1,0 +1,62 @@
+<h2>Edit Question</h2>
+
+<% if(error) { %>
+<div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<form action="/questions/<%= qs._id %>/edit?_method=PUT" method="POST">
+  <div class="mb-3">
+    <label for="text" class="form-label">Question Text</label>
+    <input
+      type="text"
+      id="text"
+      name="text"
+      class="form-control"
+      value="<%= qs.text %>"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="options" class="form-label"
+      >Options (separate with comma)</label
+    >
+    <input
+      type="text"
+      id="options"
+      name="options"
+      class="form-control"
+      value="<%= qs.options.join(', ') %>"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="correctAnswerIndex" class="form-label"
+      >Correct Answer Index</label
+    >
+    <input
+      type="number"
+      id="correctAnswerIndex"
+      name="correctAnswerIndex"
+      class="form-control"
+      min="0"
+      max="<%= qs.options.length - 1 %>"
+      value="<%= qs.correctAnswerIndex %>"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="keywords" class="form-label">Keywords (comma separated)</label>
+    <input
+      type="text"
+      id="keywords"
+      name="keywords"
+      class="form-control"
+      value="<%= qs.keywords.join(', ') %>"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Update Question</button>
+</form>

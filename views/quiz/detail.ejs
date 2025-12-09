@@ -1,0 +1,17 @@
+<h2><%= quiz.title %></h2>
+<p><%= quiz.description %></p>
+
+<h4>Questions:</h4>
+<% if(quiz.questions && quiz.questions.length > 0) { %>
+<ul>
+  <% quiz.questions.forEach(function(q, idx) { %>
+  <li><strong>Q<%= idx + 1 %>:</strong> <%= q.text %></li>
+  <% }) %>
+</ul>
+<% } else { %>
+<p>Chưa có câu hỏi nào trong quiz này.</p>
+<% } %>
+
+<button onclick="window.location='/quizzes/<%= quiz._id %>/question'">
+  Add Question
+</button>

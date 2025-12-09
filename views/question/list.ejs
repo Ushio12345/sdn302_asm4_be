@@ -1,0 +1,41 @@
+<section>
+  <% if (questions && questions.length > 0) { %> <%
+  questions.forEach(function(question) { %>
+  <div
+    class="question-item p-3 mb-3 border d-flex justify-content-between align-items-center"
+  >
+    <p
+      class="text-black mb-0"
+      onclick="window.location='/questions/<%= question._id %>'"
+    >
+      <strong><%= question.text %></strong>
+    </p>
+
+    <div class="d-flex align-items-center">
+      <div class="me-2">
+        <button
+          onclick='window.location="/questions/<%= question._id %>/edit"'
+          class="btn btn-sm btn-warning"
+        >
+          Edit question
+        </button>
+      </div>
+
+      <div>
+        <form
+          action="/questions/<%= question._id %>?_method=DELETE"
+          method="POST"
+          onClick="event.stopPropagation()"
+          onsubmit="return confirm('Bạn có chắc chắn muốn xóa question: <%= question.title %> không?')"
+        >
+          <button type="submit" class="btn btn-sm btn-danger text-white">
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <% }) %> <% } else { %>
+  <p>Chưa có question nào.</p>
+  <% } %>
+</section>

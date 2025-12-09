@@ -1,0 +1,10 @@
+<div class="error-container">
+  <div class="error-title"><%= title || "Error" %></div>
+  <div class="error-message"><%= message || "Something went wrong." %></div>
+
+  <% if(user) { %>
+  <p>Xin chào, <strong><%= user.userName || "User" %></strong></p>
+  <% } %>
+
+  <a href="/" class="btn-home">Quay về trang chủ</a>
+</div>
