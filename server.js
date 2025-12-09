@@ -13,6 +13,9 @@ const checkUser = require("./middlewares/checkUser");
 
 const connectDB = require("./config/db.config");
 connectDB();
+const { swaggerUi, specs } = require("./config/swagger.config");
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(morgan("dev"));
 app.use(express.json());
