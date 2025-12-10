@@ -34,7 +34,7 @@ module.exports = {
       res.cookie("token", token, {
         httpOnly: true, // Không cho JS phía client đọc
         secure: false,
-        sameSite: "none",
+        sameSite: "lax",
         maxAge: 1 * 60 * 60 * 1000, // 1 giờ
       });
       return res.status(200).json({

@@ -113,7 +113,7 @@ const { verifyUser } = require("../middlewares/authenticate");
  *                       type: boolean
  *                       example: true
  */
-router.get("/me", verifyUser, async (req, res) => {
+AuthRoute.get("/me", verifyUser, async (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token)
