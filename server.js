@@ -10,6 +10,7 @@ const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
 const checkUser = require("./middlewares/checkUser");
+const cors = require("cors");
 
 const connectDB = require("./config/db.config");
 connectDB();
@@ -23,11 +24,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(methodOverride("_method"));
 
-app.use(expressLayouts);
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, "public")));
-app.set("layout", "layouts/main");
+// app.use(expressLayouts);
+// app.set("views", path.join(__dirname, "views"));
+// app.set("view engine", "ejs");
+// app.use(express.static(path.join(__dirname, "public")));
+// app.set("layout", "layouts/main");
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(checkUser);
 //api route
