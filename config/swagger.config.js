@@ -13,6 +13,11 @@ const options = {
         url: "https://sdn302-asm4-be.onrender.com",
       },
     ],
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
   apis: ["./routes/*.js"], // đường dẫn đến file route có comment swagger
 };
