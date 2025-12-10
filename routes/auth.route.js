@@ -113,11 +113,12 @@ const { verifyUser } = require("../middlewares/authenticate");
  *                       type: boolean
  *                       example: true
  */
-AuthRoute.get("/me", verifyUser, (req, res) => {
-  res.json({
-    success: true,
-    user: req.user,
-  });
+AuthRoute.get("/me", (req, res) => {
+  if (!res.locals.user) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+
+  return res.json({ success: true, user: res.locals.user });
 });
 
 module.exports = AuthRoute;

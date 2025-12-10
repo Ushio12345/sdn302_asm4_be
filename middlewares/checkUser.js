@@ -1,24 +1,31 @@
 const jwt = require("jsonwebtoken");
+const db = require("../models");
 
-const checkUser = (req, res, next) => {
+const checkUser = async (req, res, next) => {
   const token = req.cookies.token;
+
   if (!token) {
     res.locals.user = null; // Không login
     return next();
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Lấy user mới nhất từ DB
+    const user = await db.User.findById(decoded.userId).select("-password");
+
+    if (!user) {
       res.locals.user = null;
     } else {
-      res.locals.user = {
-        _id: decoded.userId,
-        username: decoded.name,
-        isAdmin: decoded.admin,
-      };
+      res.locals.user = user; // gắn object user thực tế
     }
-    next();
-  });
+  } catch (err) {
+    console.error(err);
+    res.locals.user = null;
+  }
+
+  next();
 };
 
 module.exports = checkUser;
