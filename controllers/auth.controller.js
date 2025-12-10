@@ -41,6 +41,11 @@ module.exports = {
         success: true,
         message: "Login successful",
         token,
+        data: {
+          userId: user._id,
+          isAdmin: user.isAdmin,
+          userName: user.userName,
+        },
       });
     } catch (error) {
       console.error(error);
