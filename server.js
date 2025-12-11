@@ -31,8 +31,8 @@ app.use(methodOverride("_method"));
 // app.set("layout", "layouts/main");
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    credentials: true,
+    origin: ["http://localhost:5173", "https://sdn302-asm4-fe.vercel.app"],
+    credentials: true, // nếu có gửi cookie
   })
 );
 
