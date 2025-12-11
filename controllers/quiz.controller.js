@@ -113,7 +113,10 @@ module.exports = {
       });
     }
 
-    const optionsArray = Array.isArray(options) ? options : options.split(",");
+    // Xử lý options
+    const optionsArray = Array.isArray(options)
+      ? options.map((o) => o.trim())
+      : options.split(",").map((o) => o.trim());
 
     if (optionsArray.length < 4) {
       return res.status(400).json({
@@ -122,6 +125,7 @@ module.exports = {
       });
     }
 
+    // Kiểm tra câu hỏi trùng text
     const existingQuestion = await db.Question.findOne({ text });
 
     let questionIdToUse;
@@ -141,10 +145,17 @@ module.exports = {
 
       questionIdToUse = existingQuestion._id;
     } else {
+      // Xử lý keywords đúng
+      const keywordArray = keywords
+        ? Array.isArray(keywords)
+          ? keywords
+          : keywords.split(",").map((k) => k.trim())
+        : [];
+
       const newQuestion = await db.Question.create({
         text,
         options: optionsArray,
-        keywords: keywords ? keywords.split(",") : [],
+        keywords: keywordArray,
         correctAnswerIndex: Number(correctAnswerIndex),
         author: req.user?._id,
       });

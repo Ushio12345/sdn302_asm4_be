@@ -162,7 +162,7 @@ QuizzRoute.delete(
  *         description: Quiz not found
  */
 QuizzRoute.post(
-  "/:id/question",
+  "/:quizId/question",
   verifyUser,
   verifyAdmin,
   quizzesController.addNewQuestion

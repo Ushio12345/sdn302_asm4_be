@@ -113,12 +113,21 @@ const { verifyUser } = require("../middlewares/authenticate");
  *                       type: boolean
  *                       example: true
  */
-AuthRoute.get("/me", (req, res) => {
-  if (!res.locals.user) {
-    return res.status(401).json({ success: false, message: "Unauthorized" });
-  }
+// GET /auth/me
+AuthRoute.get("/me", verifyUser, async (req, res) => {
+  try {
+    const user = await db.User.findById(req.user._id).select("-password");
 
-  return res.json({ success: true, user: res.locals.user });
+    res.json({
+      success: true,
+      user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
 });
 
 module.exports = AuthRoute;

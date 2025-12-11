@@ -22,7 +22,7 @@ exports.verifyUser = (req, res, next) => {
 
     req.user = {
       _id: decoded.userId,
-      isAdmin: decoded.admin,
+      isAdmin: decoded.isAdmin,
       userName: decoded.userName,
     };
     next();
@@ -33,6 +33,7 @@ exports.verifyAdmin = (req, res, next) => {
   if (req.user && req.user.isAdmin === true) {
     return next();
   }
+  // console.log(req.user.isAdmin);
 
   return res.status(403).json({
     status: "error",
